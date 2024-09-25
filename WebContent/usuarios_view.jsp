@@ -55,7 +55,7 @@
         </table>
         <br> 
         <input type="button" value=" Regresar "
-            onclick="window.location='${ pageContext.request.contextPath }/usuarios.jsp'">
+            onclick="window.location='${ pageContext.request.contextPath }/UsuarioUpdateForm'">
     </form>
     <br>
 </body>
