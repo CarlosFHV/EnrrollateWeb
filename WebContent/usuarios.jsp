@@ -83,19 +83,24 @@
                                 <input type="hidden" name="id_usuario" value="${usuario.idUsuario}">
                                <td align="center">  <input type="button" value="Ver" onclick="window.location='UserForm?llave=${usuario.idUsuario}'"></td>
                             </form>
-                            <form method="get" action="${pageContext.request.contextPath}/UsuarioView">
-                                <input type="hidden" name="id_usuario" value="${usuario.idUsuario}">
-                               <td align="center">  <input type="button" value="XLS" onclick="window.location='UserFormXls?id_usuario=${usuario.idUsuario}'"></td>
-                            </form>
-                            <form method="get" action="${pageContext.request.contextPath}/UsuarioView">
+                            
+                                                        <form method="get" action="${pageContext.request.contextPath}/UsuarioView">
                                 <input type="hidden" name="id_usuario" value="${usuario.idUsuario}">
                               <td align="center">   <input type="button" value="PDF" onclick="window.location='UserFormPdf?id_usuario=${usuario.idUsuario}'"></td>
                             </form>
-                           <form method="get" action="${pageContext.request.contextPath}/UsuarioView">
+                            
+                                <form method="get" action="${pageContext.request.contextPath}/UsuarioView">
                                 <input type="hidden" name="id_usuario" value="${usuario.idUsuario}">
                            <td align="center">      <input type="button" value="Html" onclick="window.location='UserFormHtml?id_usuario=${usuario.idUsuario}'"></td>
                             </form>
                         
+                            
+                            <form method="get" action="${pageContext.request.contextPath}/UsuarioView">
+                                <input type="hidden" name="id_usuario" value="${usuario.idUsuario}">
+                               <td align="center">  <input type="button" value="XLS" onclick="window.location='UserFormXls?id_usuario=${usuario.idUsuario}'"></td>
+                            </form>
+
+                       
 				
 			</tr>
 		</c:forEach>
