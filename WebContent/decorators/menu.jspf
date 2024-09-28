@@ -12,7 +12,7 @@
     </td>
 
     <td align="center" width="140" class="menu"><a href=
-        "<%=request.getContextPath()%>/login.html">Logout</a></td>
+        "<%=request.getContextPath()%>/Logout">Logout</a></td>
   </tr>
 
   <tr>
