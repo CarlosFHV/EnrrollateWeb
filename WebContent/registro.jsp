@@ -1,4 +1,12 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%
+    // Verifica si la sesión existe
+    if (session != null && session.getAttribute("email") != null) {
+        response.sendRedirect("VerProductos"); // Redirige si hay sesión
+        return; // Termina la ejecución del servlet o JSP
+    }
+%>
 <%@ page import="java.sql.*" %>
 <%@ page import="javax.naming.*" %>
 <%@ page import="javax.sql.*" %>

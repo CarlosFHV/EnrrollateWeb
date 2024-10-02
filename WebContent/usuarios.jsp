@@ -1,3 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%
+    if (session == null || session.getAttribute("email") == null) { // Cambia a email
+    	response.sendRedirect("login.jsp"); // Redirige si no hay sesi贸n
+        
+        return; // Termina la ejecuci贸n
+    }
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
@@ -6,16 +15,16 @@
 <meta http-equiv="content-type"
 	content="text/html; charset=windows-1252">
 <meta name="ArachnoCoders" content="ArachnoCoders">
-<title>Forma de B鷖queda de Usuarios</title>
+<title>Forma de B煤squeda de Usuarios</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
-	<!-- Formulario de b鷖queda -->
+	<!-- Formulario de b煤squeda -->
 	<form method="get"
 		action="${pageContext.request.contextPath}/UsuarioUpdateForm">
-		<div class="step">Forma de B鷖queda de Usuario</div>
-		<div class="instructions">Proporciona la informaci髇 de b鷖queda
+		<div class="step">Forma de B煤squeda de Usuario</div>
+		<div class="instructions">Proporciona la informaci贸n de b煤squeda
 			solicitada</div>
 		<br>
 		<c:set var="pattern" value="${param.pattern}" />
@@ -28,7 +37,7 @@
 					<table>
 						<tr class="form">
 							<td align="right">
-								<div class="label">Patr髇:</div>
+								<div class="label">Patr贸n:</div>
 							</td>
 							<td><input name="pattern" size="10" value="${pattern}"></td>
 							<td><input type="submit" value="Buscar"></td>
@@ -46,8 +55,8 @@
 			<td align="center"><div class="label">ID</div></td>
 			<td align="center"><div class="label">NOMBRE</div></td>
 			<td align="center"><div class="label">EMAIL</div></td>
-			<td align="center"><div class="label">DIRECCI覰</div></td>
-			<td align="center"><div class="label">TEL蒄ONO</div></td>
+			<td align="center"><div class="label">DIRECCI脫N</div></td>
+			<td align="center"><div class="label">TEL脡FONO</div></td>
 			<td align="center"><div class="label">ROL</div></td>
 			<td align="center"><div class="label">FECHA_REGISTRO</div></td>
 			<td align="center"><div class="label">MODIFICAR</div></td>
@@ -67,9 +76,9 @@
 						value="${usuario.nombre}" size="10"></td>
 					<td align="center"><input type="text" name="email"
 						value="${usuario.email}" size="15"></td>
-					<td align="center"><input type="text" name="direcci髇"
+					<td align="center"><input type="text" name="direccion"
 						value="${usuario.direccion}" size="20"></td>
-					<td align="center"><input type="text" name="tel閒ono"
+					<td align="center"><input type="text" name="telefono"
 						value="${usuario.telefono}" size="10"></td>
 					<td align="center"><input type="text" name="rol"
 						value="${usuario.rol}" size="10"></td>
@@ -106,7 +115,14 @@
 		</c:forEach>
 	</table>
 	<br>
-	<!-- Bot髇 Regresar -->
+	    <form action="UserHTML" method="get">
+        <button type="submit">Descargar Lista de Usuarios HTML</button>
+    </form>
+    
+     <form action="UserPDF" method="get">
+        <button type="submit">Descargar Lista de Usuarios PDF</button>
+    </form>
+	<!-- Bot贸n Regresar -->
 	<input type="button" value="Regresar"
 		onclick="window.location='${pageContext.request.contextPath}/gestion.jsp'">
 </body>

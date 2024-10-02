@@ -1,4 +1,12 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%
+    if (session == null || session.getAttribute("email") == null) { // Cambia a email
+    	response.sendRedirect("login.jsp"); // Redirige si no hay sesión
+        
+        return; // Termina la ejecución
+    }
+%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>

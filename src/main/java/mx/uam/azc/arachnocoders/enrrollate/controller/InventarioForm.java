@@ -18,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import mx.uam.azc.arachnocoders.enrrollate.data.InventarioDTO;
@@ -42,6 +43,16 @@ public class InventarioForm extends HttpServlet {
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Obtener el ID del usuario desde la sesión
+        HttpSession session = request.getSession();
+        Integer idUsuario = (Integer) session.getAttribute("idUsuario"); // Asegúrate de que el ID del usuario esté guardado en la sesión
+
+        if (idUsuario == null) {
+            // Maneja el caso donde el ID de usuario no esté disponible
+            response.sendRedirect(request.getContextPath() + "/login.jsp");
+            return;
+        }
+
 
         try {
         	log("Enviando inventario");

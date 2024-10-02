@@ -1,3 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%
+    if (session == null || session.getAttribute("email") == null) { // Cambia a email
+    	response.sendRedirect("login.jsp"); // Redirige si no hay sesión
+        
+        return; // Termina la ejecución
+    }
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
@@ -29,7 +38,7 @@
                     <div class="label">Cantidad Disponible</div>
                 </td>
                 <td align="center">
-                    <div class="label">Ubicaci�n en el Amacen</div>
+                    <div class="label">Ubicación en el Amacen</div>
                 </td>
                
             </tr>

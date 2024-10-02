@@ -1,5 +1,17 @@
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%
+    if (session == null || session.getAttribute("email") == null) { // Cambia a email
+    	response.sendRedirect("login.jsp"); // Redirige si no hay sesión
+        
+        return; // Termina la ejecución
+    }
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,6 +70,12 @@
             <input type="submit" value="Exportar a HTML" />
         </form>
     </div>
+  <div style="margin-top: 20px;"> <!-- Ajusta el valor según lo necesites -->
+    <input type="button" value="Regresar" 
+        onclick="window.location='${pageContext.request.contextPath}/gestion.jsp'">
+</div>
+ 
+    	
     
   
 </body>

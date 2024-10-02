@@ -24,7 +24,13 @@ public class VerCarritoServlet extends HttpServlet {
             throws ServletException, IOException {
         // Obtener el ID del usuario desde la sesión
         HttpSession session = request.getSession();
-        int idUsuario = (int) session.getAttribute("idUsuario");
+        Integer idUsuario = (Integer) session.getAttribute("idUsuario"); // Asegúrate de que el ID del usuario esté guardado en la sesión
+
+        if (idUsuario == null) {
+            // Maneja el caso donde el ID de usuario no esté disponible
+            response.sendRedirect(request.getContextPath() + "/login.jsp");
+            return;
+        }
 
         List<CarritoDTO> carritoList = new ArrayList<>();
 

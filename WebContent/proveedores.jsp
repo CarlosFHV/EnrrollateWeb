@@ -30,6 +30,7 @@
 			<td align="center"><div class="label">HTML</div></td>
 			<td align="center"><div class="label">XLS</div></td>
 			<td align="center"><div class="label">BORRAR</div></td>
+			
 		</tr>
 		<c:forEach var="proveedor" items="${proveedores}"> 
 			<tr>
@@ -44,7 +45,7 @@
 					<td align="center"><input type="text" name="Contacto"
 						value="${proveedor.contacto}" size="10"></td>
 						
-					<td align="center"><input type="text" name="Teléfono" 
+					<td align="center"><input type="text" name="Telefono" 
 					value="${proveedor.telefono}" size="15"></td>
 						
 					<td align="center"><input type="text" name="Email"
@@ -59,7 +60,7 @@
                                <td align="center">  <input type="button" value="Ver" onclick="window.location='ProveedorView?llave=${proveedor.idProveedor}'"></td>
                             </form>
                             
-                                                        <form method="get" action="${pageContext.request.contextPath}/UsuarioView">
+                                <form method="get" action="${pageContext.request.contextPath}/UsuarioView">
                                 <input type="hidden" name="id_usuario" value="${usuario.idUsuario}">
                               <td align="center">   <input type="button" value="PDF" onclick="window.location='ProveedorFormPdf?id_proveedor=${proveedor.idProveedor}'"></td>
                             </form>
@@ -79,9 +80,24 @@
                                 <input type="hidden" name="id_usuario" value="${usuario.idUsuario}">
                                <td align="center">  <input type="button" value="BORRAR" onclick="window.location='ProveedorDelete?id_proveedor=${proveedor.idProveedor}'"></td>
                             </form>
+                       
+                            
 			</tr>
+			 
 		</c:forEach> 
 	</table>
-    
+	<div style="text-align: center; margin-top: 20px;">
+    <form method="get" action="${pageContext.request.contextPath}/ProveedorPDF">
+        <input type="hidden" name="id_usuario" value="${usuario.idUsuario}">
+        <input type="submit" value="Exportar en PDF">
+    </form>
+    <form method="get" action="${pageContext.request.contextPath}/ProveedorHTML">
+        <input type="hidden" name="id_usuario" value="${usuario.idUsuario}">
+        <input type="submit" value="Exportar en HTML" onclick="window.location='ProveedorHTML'">
+    </form>
+    <form method="get" action="${pageContext.request.contextPath}/ProveedorXLS">
+        <input type="submit" value="Exportar en XLS" onclick="window.location='ProveedorXLS'">
+    </form>
+</div>
 </body>
 </html>

@@ -1,4 +1,14 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%
+    if (session != null && session.getAttribute("email") != null ) { // Cambia a email
+    	response.sendRedirect("VerProductos"); // Redirige si no hay sesión
+        
+        return; // Termina la ejecución
+    }
+
+		
+
+%>
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=windows-1252">
@@ -56,5 +66,13 @@
             </tr>
         </tbody>
     </table>
+    
+    <% 
+        // Mensaje de error si está presente
+        String errorMessage = (String) request.getAttribute("errorMessage");
+        if (errorMessage != null) {
+    %>
+        <p style='color:red;'><%= errorMessage %></p>
+    <% } %>
 </body>
 </html>

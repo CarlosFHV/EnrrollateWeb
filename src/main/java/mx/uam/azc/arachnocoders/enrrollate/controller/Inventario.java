@@ -54,7 +54,7 @@ public class Inventario extends HttpServlet {
 		    String idInventario = request.getParameter("ID_Inventario");
 		    String idProducto = request.getParameter("ID_Producto");
 		    String cantidad = request.getParameter("Cantidad_Disponible");
-	        String ubicacionA = request.getParameter("Ubicación_Almacen");
+	        String ubicacionA = request.getParameter("Ubicacion_Almacen");
 
 
 	        InventarioDTO inventario = new InventarioDTO();

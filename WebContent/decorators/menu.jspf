@@ -1,12 +1,12 @@
-<table border="0" cellspacing="0" cellpadding="0" width="160" >
-
-
-  <tr>
- 
-
-    <td align="center" width="140" class="menu"><a href=
-        "<%=request.getContextPath()%>/Logout">Logout</a></td>
-  </tr>
-
-
+<table border="0" cellspacing="0" cellpadding="0" width="160">
+    <tr>
+        <td align="center" width="140" class="menu">
+            <a href="<%=request.getContextPath()%>/Logout" style="display: inline-block; width: 140px; text-align: center; margin-bottom: 10px;margin-top: 10px;">Logout</a>
+        </td>
+    </tr>
+    <tr>
+        <td align="center" width="140" class="menu">
+            <a href="<%=request.getContextPath()%>/actualizar_usuario.jsp" style="display: inline-block; width: 140px; text-align: center; margin-bottom: 10px;">Configuración Perfil</a>
+        </td>
+    </tr>
 </table>

@@ -49,7 +49,7 @@ public class ProveedorUpdate extends HttpServlet {
 	 	String idProveedor = request.getParameter("ID_Proveedor");
 	    String nombreProveedor = request.getParameter("Nombre_Proveedor");
 	    String contacto = request.getParameter("Contacto");
-	    String telefono = request.getParameter("Teléfono");
+	    String telefono = request.getParameter("Telefono");
         String email = request.getParameter("Email");
 
         ProveedorDTO proveedor = new ProveedorDTO();

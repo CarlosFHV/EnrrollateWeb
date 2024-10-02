@@ -27,14 +27,18 @@ public class LoginServlet extends HttpServlet {
                 System.out.println("a");
                 HttpSession session = request.getSession(); 
 
-                // Obtener el idUsuario y guardarlo en la sesión
+                // Obtener el idUsuario, rol y guardarlo en la sesión
                 Integer idUsuario = getUserIdByEmail(email);
+                String Rol = getRolByEmail(email);
+
                 session.setAttribute("email", email);
-                session.setAttribute("idUsuario", idUsuario); // Guarda el idUsuario en la sesión
+                session.setAttribute("idUsuario", idUsuario); 
+                session.setAttribute("Rol", Rol);
 
                 response.sendRedirect("VerProductos");
             } else {
-                System.out.println("b");
+                request.setAttribute("errorMessage", "Usuario o contraseña incorrectos");
+
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
             }
         } catch (Exception e) {
@@ -68,6 +72,22 @@ public class LoginServlet extends HttpServlet {
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     return resultSet.getInt("ID_Usuario"); // Retorna el idUsuario si se encuentra
+                }
+            }
+        }
+        return null; // Retorna null si no se encuentra el usuario
+    }
+    
+    // Nueva función para obtener el idUsuario por email
+    private String getRolByEmail(String email) throws NamingException, SQLException {
+        Context context = new InitialContext();
+        DataSource source = (DataSource) context.lookup("java:comp/env/jdbc/TestDS");
+        try (Connection connection = source.getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT Rol FROM usuarios WHERE Email = ?")) {
+            statement.setString(1, email);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getString("Rol"); // Retorna el idUsuario si se encuentra
                 }
             }
         }

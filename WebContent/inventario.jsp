@@ -45,7 +45,7 @@
 						value="${inventario.idProducto}" size="10"></td>
 					<td align="center"><input type="text"
 						name="Cantidad_Disponible" value="${inventario.cantidad}" size="15"></td>
-					<td align="center"><input type="text" name="Ubicación_Almacen"
+					<td align="center"><input type="text" name="Ubicacion_Almacen"
 						value="${inventario.ubicacion}" size="20"></td>
 
 
@@ -81,6 +81,16 @@
 		</c:forEach> 
 	
 	</table>
-	
+	<div style="text-align: center; margin-top: 20px;">
+    <form method="get" action="${pageContext.request.contextPath}/InventarioPDF">
+        <input type="submit" value="Exportar en PDF" onclick="window.location='InventarioPDF'">
+    </form>
+    <form method="get" action="${pageContext.request.contextPath}/InventarioHTML">
+        <input type="submit" value="Exportar en HTML" onclick="window.location='InventarioHTML'">
+    </form>
+    <form method="get" action="${pageContext.request.contextPath}/InventarioXLS">
+        <input type="submit" value="Exportar en XLS" onclick="window.location='InventarioXLS'">
+    </form>
+</div>
 </body>
 </html>

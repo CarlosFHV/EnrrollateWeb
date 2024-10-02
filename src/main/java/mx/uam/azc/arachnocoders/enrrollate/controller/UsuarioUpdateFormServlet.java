@@ -24,44 +24,42 @@ import java.util.List;
 public class UsuarioUpdateFormServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-     *      response)
-     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String pattern = request.getParameter("pattern");
+        if (pattern == null || pattern.isEmpty()) {
+            pattern = "%"; // Si no hay patrón, usar '%' para obtener todos los usuarios
+        }
 
         try {
-            List<UsuarioDTO> Usuario = getUsuario();
-            request.setAttribute("usuarios", Usuario);
+            List<UsuarioDTO> usuarios = getUsuario(pattern);
+            request.setAttribute("usuarios", usuarios);
         } catch (Exception e) {
             throw new ServletException(e);
         }
         RequestDispatcher dispatcher = request.getRequestDispatcher("/usuarios.jsp");
         dispatcher.forward(request, response);
-
     }
 
-    private List<UsuarioDTO> getUsuario() throws NamingException, SQLException {
+    private List<UsuarioDTO> getUsuario(String pattern) throws NamingException, SQLException {
         Context context = new InitialContext();
         DataSource source = (DataSource) context.lookup("java:comp/env/jdbc/TestDS");
         Connection connection = source.getConnection();
         try {
-            return getUsuario(connection);
+            return getUsuario(connection, pattern);
         } finally {
             connection.close();
         }
     }
 
-    private List<UsuarioDTO> getUsuario(Connection connection) throws
-    SQLException {
-        Statement statement = connection.createStatement();
-        ResultSet cursor = statement.executeQuery("SELECT id_usuario, nombre, email, dirección, teléfono, rol, fecha_registro FROM usuarios");
-        try {
+    private List<UsuarioDTO> getUsuario(Connection connection, String pattern) throws SQLException {
+        String query = "SELECT id_usuario, nombre, email, dirección, teléfono, rol, fecha_registro FROM usuarios WHERE nombre LIKE ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, pattern);
+            ResultSet cursor = statement.executeQuery();
             List<UsuarioDTO> usuarios = new ArrayList<UsuarioDTO>();
             while (cursor.next()) {
                 UsuarioDTO usuario = new UsuarioDTO();
-                
                 usuario.setIdUsuario(cursor.getString(1));
                 usuario.setNombre(cursor.getString(2));
                 usuario.setEmail(cursor.getString(3));
@@ -69,14 +67,9 @@ public class UsuarioUpdateFormServlet extends HttpServlet {
                 usuario.setTelefono(cursor.getString(5));
                 usuario.setRol(cursor.getString(6));
                 usuario.setFechaRegistro(cursor.getString(7));
-                
-               
                 usuarios.add(usuario);
             }
             return usuarios;
-        } finally {
-        cursor.close();
         }
     }
-
 }

@@ -61,14 +61,23 @@ public class UsuarioUpdateServlet extends HttpServlet {
      */
     private void updateUsuario(HttpServletRequest request, HttpServletResponse response)
             throws NamingException, SQLException {
+    	
         String idUsuario = request.getParameter("id_usuario");
         String nombre = request.getParameter("nombre");
         String email = request.getParameter("email");
-        String direccion = request.getParameter("dirección");
-        String telefono = request.getParameter("teléfono");
+        String direccion = request.getParameter("direccion");
+        String telefono = request.getParameter("telefono");
         String rol = request.getParameter("rol");
         String fechaRegistro = request.getParameter("fecha_registro");
 
+        // Log de los parámetros recibidos
+        log("ID Usuario: " + idUsuario);
+        log("Nombre: " + nombre);
+        log("Email: " + email);
+        log("Dirección: " + direccion);
+        log("Teléfono: " + telefono);
+        log("Rol: " + rol);
+        log("Fecha Registro: " + fechaRegistro);
         UsuarioDTO usuario = new UsuarioDTO();
         usuario.setIdUsuario(idUsuario);
         usuario.setNombre(nombre);
@@ -102,7 +111,7 @@ public class UsuarioUpdateServlet extends HttpServlet {
      * @param fechaRegistro Fecha de registro del usuario.
      */
     private void updateUsuario(Connection connection, UsuarioDTO usuario) throws SQLException {
-        String sql = "UPDATE usuarios SET nombre = ?, email = ?, dirección = ?, teléfono = ?, rol = ?, fecha_registro = ? WHERE id_usuario = ?";
+        String sql = "UPDATE usuarios SET nombre = ?, email = ?, Dirección = ?, teléfono = ?, rol = ?, fecha_registro = ? WHERE id_usuario = ?";
         PreparedStatement statement = null;
         
         try {

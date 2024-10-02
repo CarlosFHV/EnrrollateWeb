@@ -1,5 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%
+	if (session == null || session.getAttribute("email") == null || session.getAttribute("idUsuario") == null) {
+    	response.sendRedirect("login.jsp"); // Redirige si no hay sesión
+        
+        return; // Termina la ejecución
+    }
+%>
 <%@ page import="mx.uam.azc.arachnocoders.enrrollate.data.CarritoDTO" %>
 
 <html>
@@ -46,7 +54,9 @@
             %>
         </table>
     </form>
-
+    <%
+        if (carritoList != null && !carritoList.isEmpty()) {
+    %>
     <!-- Formulario para finalizar pedido -->
     <h2>Finalizar Pedido</h2>
     <form action="realizarPedido" method="post">
@@ -54,5 +64,9 @@
         <input type="text" id="direccionEnvio" name="direccionEnvio" required><br><br>
         <input type="submit" value="Realizar Pedido">
     </form>
+    
+    <%
+                }
+            %>
 </body>
 </html>

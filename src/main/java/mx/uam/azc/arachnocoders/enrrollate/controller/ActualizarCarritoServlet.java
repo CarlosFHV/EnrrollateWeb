@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.Connection;
@@ -21,8 +22,15 @@ public class ActualizarCarritoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Obtener el ID del usuario desde la sesión
-        int idUsuario = (int) request.getSession().getAttribute("idUsuario");
+        // Obtener el ID del usuario desde la sesión
+        HttpSession session = request.getSession();
+        Integer idUsuario = (Integer) session.getAttribute("idUsuario");
 
+        if (idUsuario == null) {
+            // Manejar el caso en que el ID de usuario no está disponible
+            response.sendRedirect(request.getContextPath() + "/login.jsp");
+            return;
+        }        
         try {
             // Establecer conexión con la base de datos a través del DataSource
             Context context = new InitialContext();

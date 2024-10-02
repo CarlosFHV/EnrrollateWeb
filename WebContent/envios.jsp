@@ -1,17 +1,26 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%
+    if (session == null || session.getAttribute("email") == null) { // Cambia a email
+    	response.sendRedirect("login.jsp"); // Redirige si no hay sesión
+        
+        return; // Termina la ejecución
+    }
+%>
 <html>
 <head>
-    <title>Modificar Env�os</title>
+    <title>Modificar Envíos</title>
 </head>
 <body>
-    <h2>Modificar Env�os</h2>
+    <h2>Modificar Envíos</h2>
     <table border="1">
         <tr>
-            <th>ID Env�o</th>
+            <th>ID Envío</th>
             <th>ID Pedido</th>
-            <th>Fecha Env�o</th>
+            <th>Fecha Envío</th>
             <th>Fecha Entrega</th>
-            <th>Estado Env�o</th>
+            <th>Estado Envío</th>
             <th>Empresa Transporte</th>
             <th>Modificar</th>
         </tr>
@@ -24,7 +33,7 @@
                     <td><input type="text" name="fecha_entrega" value="${envio.fechaEntrega}"></td>
                     <td>
                         <select name="estado_envio">
-                            <option value="en tr�nsito" <c:if test="${envio.estadoEnvio == 'en tr�nsito'}">selected</c:if>>en tr�nsito</option>
+                            <option value="en tránsito" <c:if test="${envio.estadoEnvio == 'en tránsito'}">selected</c:if>>en tránsito</option>
                             <option value="entregado" <c:if test="${envio.estadoEnvio == 'entregado'}">selected</c:if>>entregado</option>
                             <option value="retrasado" <c:if test="${envio.estadoEnvio == 'retrasado'}">selected</c:if>>retrasado</option>
                         </select>
@@ -50,6 +59,9 @@
         <input type="submit" value="Exportar a HTML">
     </form>
 </div>
-
+  <div style="margin-top: 20px;"> <!-- Ajusta el valor según lo necesites -->
+    <input type="button" value="Regresar" 
+        onclick="window.location='${pageContext.request.contextPath}/gestion.jsp'">
+</div>
 </body>
 </html>

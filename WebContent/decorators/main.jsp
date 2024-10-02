@@ -21,9 +21,17 @@
         </tr>
         <tr>
             <td align="center" valign="top" width="150" class="menu">
-                <%@include file="menu.jspf"%>
+            
+            <%@ page import="javax.servlet.http.HttpSession" %>
+		<%
+		    if (session != null && session.getAttribute("email") != null) { %>
+		                        <%@include file="menu.jspf"%>
+		        
+	<%	    }
+		%>
+            
             </td>
-            <td valign="top" align="left" width="625">
+            <td valign="top" align="center" width="625">
                 
                 <hr> <decorator:body />
                 <br>
