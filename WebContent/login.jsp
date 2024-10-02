@@ -3,10 +3,11 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=windows-1252">
     <meta name="Author" content="Hugo Pablo Leyva">
-    <title>Página de Login</title>
+    <title>LOGIN</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
     <table border="0" cellpadding="0" cellspacing="0" width="800">
         <tbody>
             <tr>
@@ -18,18 +19,17 @@
                 </td>
                 <td width="25"> <br> </td>
                 <td align="center" valign="top" width="625">
-                    <div class="section"> Aplicación para el Mantenimiento de Clientes </div>
-                    <hr>
-                    <form method="post" action="Login"> <!-- Cambia a método POST y acción a /Login -->
-                        <div class="step"> Forma de Login </div>
-                        <div class="instructions"> Proporciona tu Email y tu contraseña para tener acceso a la aplicación </div>
+                    <div class="section"> </div>
+                    
+                    <form method="post" action="Login"> 
+                        <div class="step"> Proporciona tu Email y tu contraseña para tener acceso a la aplicación </div>
                         <table>
                             <tbody>
                                 <tr class="form">
                                     <td align="right">
                                         <div class="label"> Email: </div>
                                     </td>
-                                    <td> <input name="email" size="10"> </td> <!-- Cambia el nombre a email -->
+                                    <td> <input name="email" size="10"> </td> 
                                 </tr>
                                 <tr class="form">
                                     <td align="right">
@@ -40,7 +40,8 @@
                                 <tr>
                                     <td><br></td>
                                     <td>
-                                        <input type="submit" value="Login"> <!-- Cambia a tipo submit -->
+                                        <input type="submit" value="Login">
+                                        <input type="button" value="Registrar" onclick="window.location.href='registro.jsp'"> 
                                     </td>
                                 </tr>
                             </tbody>

@@ -13,7 +13,7 @@
 <body>
 	<!-- Formulario de búsqueda -->
 	<form method="get"
-		action="${pageContext.request.contextPath}/usuarios.jsp">
+		action="${pageContext.request.contextPath}/UsuarioUpdateForm">
 		<div class="step">Forma de Búsqueda de Usuario</div>
 		<div class="instructions">Proporciona la información de búsqueda
 			solicitada</div>
@@ -108,6 +108,6 @@
 	<br>
 	<!-- Botón Regresar -->
 	<input type="button" value="Regresar"
-		onclick="window.location='${pageContext.request.contextPath}/main.jsp'">
+		onclick="window.location='${pageContext.request.contextPath}/gestion.jsp'">
 </body>
 </html>

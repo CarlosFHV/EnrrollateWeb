@@ -1,33 +1,103 @@
-<table border="0" cellspacing="0" cellpadding=0 width="100%" >
+<table border="0" cellspacing="0" cellpadding=0 width="100%">
   <tr>
-    <td align="center" width="160">
-      <img src="<%=request.getContextPath()%>/img/arachno.jpeg"
-         height="54" width="158">
+    <td align="left" width="140">
+<img src="<%=request.getContextPath()%>/img/arachno.jpeg" height="auto" width="140" 
+     onclick="window.location.href='<%=request.getContextPath()%>/VerProductos';" 
+     style="cursor:pointer;">
     </td>
 
-    <td width="15"></td>
 
     <td align="center" valign="middle" width="625" height="40">
-      <h1 class="title">Portal de Envíos y Pedidos de papel higiénico</h1>
+      <h1 class="title">Portal de Envío de Papel Higiénico a Base de Bambú</h1>
     </td>
   </tr>
+<%@ page import="java.sql.*" %>
+<%@ page import="javax.naming.*" %>
+<%@ page import="javax.sql.*" %>
 
-  <tr>
-    <td colspan="2"></td>
-    <td align="center" class="toolbar">
-      <a href="http://www.instructores.azc.uam.mx">Principal</a>
-      | <a HREF="http://www.instructores.azc.uam.mx/mision.html">Misión</a>
-      | <a HREF="http://www.instructores.azc.uam.mx/vision.html">Visión</a>
-      | <a HREF="http://www.instructores.azc.uam.mx/casosexito.html">Casos de exito</a>
-      | <a HREF="http://www.instructores.azc.uam.mx/contacto.html">Contactanos</a>
-    </td>
-  </tr>
+<%
+    int cantidadProductos = 0;
+	String rolUsuario = "";
 
-  <tr>
-      <td colspan="2"></td>
-      <td align="center" valign="middle" width="625" height="10"><img
-        src="<%=request.getContextPath()%>/img/bar.png"
-        height="5" width="625"></td>
-  </tr>
+    // Configuración de la conexión a la base de datos
+    Connection connection = null;
+    PreparedStatement statement = null;
+    ResultSet resultSet = null;
+
+    String emailUsuario = (String) session.getAttribute("email"); // Obtiene el email del usuario de la sesión
+
+    if (emailUsuario == null) {
+        // Muestra un mensaje de error o redirige a otra página si no hay email
+    	cantidadProductos = 0;
+    } else {
+        try {
+            // Obtén el contexto y la fuente de datos
+            Context context = new InitialContext();
+            DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/TestDS");
+
+            // Abre la conexión
+            connection = dataSource.getConnection();
+
+            String query = "SELECT COUNT(*) AS total " +
+                           "FROM carrito_producto cp " +
+                           "INNER JOIN carrito c ON cp.ID_Carrito = c.ID_Carrito " +
+                           "INNER JOIN usuarios u ON c.ID_Usuario = u.ID_Usuario " +
+                           "WHERE u.Email = ?";
+
+            statement = connection.prepareStatement(query);
+            statement.setString(1, emailUsuario); 
+
+            resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                cantidadProductos = resultSet.getInt("total");
+            }
+            
+            resultSet.close(); 
+
+            
+            String queryRol = "SELECT Rol FROM usuarios WHERE ID_Usuario = ?";
+            Integer idUsuario = (Integer) session.getAttribute("idUsuario");
+		     statement = connection.prepareStatement(queryRol);
+		     statement.setInt(1, idUsuario);
+		
+		     resultSet = statement.executeQuery();
+		            
+		     if (resultSet.next()) {
+                 rolUsuario = resultSet.getString("Rol");
+             }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            out.println("<p style='color:red;'>Error al acceder a la base de datos: " + e.getMessage() + "</p>");
+        } catch (NamingException e) {
+            e.printStackTrace();
+            out.println("<p style='color:red;'>Error en la configuración de la base de datos: " + e.getMessage() + "</p>");
+        } finally {
+            // Cierra los recursos
+            if (resultSet != null) try { resultSet.close(); } catch (SQLException e) { e.printStackTrace(); }
+            if (statement != null) try { statement.close(); } catch (SQLException e) { e.printStackTrace(); }
+            if (connection != null) try { connection.close(); } catch (SQLException e) { e.printStackTrace(); }
+        }
+    }
+%>
+
+  <% if (emailUsuario != null) { %>
+    <tr>
+      <td  colspan="2"  align="center" class="toolbar">
+        <a href="<%=request.getContextPath()%>/VerProductos">Productos</a>
+    	 <a href="<%=request.getContextPath()%>/MisPedidosServlet">Mis Pedidos</a>
+        <a href="<%=request.getContextPath()%>/verCarrito">Carrito ( <%= cantidadProductos %> )</a>
+        
+        <% if (rolUsuario.equals("admin")) { %> <!-- Verifica si el rol del usuario es 'admin' -->
+ 		
+         <a HREF="<%=request.getContextPath()%>/gestion.jsp">Módulo de Gestión </a> <% } %>
+      </td>
+    </tr>
+  <% } %>
+<tr>
+  <td colspan="2" style="padding: 0;">
+    <img src="<%=request.getContextPath()%>/img/bar.png" height="5" width="100%" style="display: block;">
+  </td>
+</tr>
 
 </table>

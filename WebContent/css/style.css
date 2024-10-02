@@ -1,5 +1,5 @@
-body { background-color:#FFFFFF; font-family:Helvetica,sans-serif; }
-:link { color:#400040; }
+body { background-color:lightblue; font-family:Helvetica,sans-serif; }
+:link { color:white; }
 :vlink { color:#400040; }
 :alink { color:#ffff00; }
 .important { font-weight:bold; color:red; display:inline; font-size:smaller; }
@@ -7,7 +7,26 @@ body { background-color:#FFFFFF; font-family:Helvetica,sans-serif; }
 .step { font-weight:bold; color:#800000; margin:5; }
 .instructions { font-size:smaller; }
 .instructionlist { text-align:left; }
-.form { background-color:#00ff00; }
+.form { background-color:#007fff ; }
 .label { font-size:smaller; font-weight:bold; color:white; margin:5 5 5 5;}
 .item { font-weight:bold; margin:0 5 30 5; text-align:left; }
 .smallitem { font-size:smaller; }
+.table-container {
+            background-color: white;
+           
+        }
+  a {
+            display: inline-block; /* Para que se comporte como un bloque en línea */
+            padding: 10px 20px; /* Espaciado interno */
+            font-size: 16px; /* Tamaño de fuente */
+            color: white; /* Color del texto */
+            background-color: #007fff ; /* Color de fondo */
+            text-align: center; /* Centrar el texto */
+            text-decoration: none; /* Sin subrayado */
+            border-radius: 5px; /* Bordes redondeados */
+            transition: background-color 0.3s; /* Efecto de transición */
+        }
+
+        a:hover {
+            background-color: blue; /* Color de fondo al pasar el ratón */
+        }

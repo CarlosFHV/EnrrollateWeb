@@ -102,4 +102,101 @@
 	</servlet-mapping>
 
 
+<servlet>
+    <servlet-name>VerProductosServlet</servlet-name>
+    <servlet-class>mx.uam.azc.arachnocoders.enrrollate.controller.VerProductosServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>VerProductosServlet</servlet-name>
+    <url-pattern>/VerProductos</url-pattern>
+</servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>CarritoServlet</servlet-name>
+        <servlet-class>mx.uam.azc.arachnocoders.enrrollate.controller.CarritoServlet</servlet-class>
+    </servlet>
+
+    <!-- Mapeo del servlet -->
+    <servlet-mapping>
+        <servlet-name>CarritoServlet</servlet-name>
+        <url-pattern>/agregarCarrito</url-pattern>
+    </servlet-mapping>
+<servlet>
+
+    <servlet-name>VerCarritoServlet</servlet-name>
+    <servlet-class>mx.uam.azc.arachnocoders.enrrollate.controller.VerCarritoServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>VerCarritoServlet</servlet-name>
+    <url-pattern>/verCarrito</url-pattern>
+</servlet-mapping>
+
+
+<servlet>
+    <servlet-name>RealizarPedidoServlet</servlet-name>
+    <servlet-class>mx.uam.azc.arachnocoders.enrrollate.controller.RealizarPedidoServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>RealizarPedidoServlet</servlet-name>
+    <url-pattern>/realizarPedido</url-pattern>
+</servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>RegistrarServlet</servlet-name>
+        <servlet-class>mx.uam.azc.arachnocoders.enrrollate.controller.RegistrarServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RegistrarServlet</servlet-name>
+        <url-pattern>/RegistrarServlet</url-pattern>
+    </servlet-mapping>
+    
+    
+        <servlet>
+        <servlet-name>ProveedorUpdateForm</servlet-name>
+        <servlet-class>mx.uam.azc.arachnocoders.enrrollate.controller.ProveedorUpdateForm</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ProveedorUpdateForm</servlet-name>
+        <url-pattern>/ProveedorUpdateForm</url-pattern>
+    </servlet-mapping>
+    
+    
+            <servlet>
+        <servlet-name>InventarioFormXLS</servlet-name>
+        <servlet-class>mx.uam.azc.arachnocoders.enrrollate.controller.InventarioFormXLS</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>InventarioFormXLS</servlet-name>
+        <url-pattern>/InventarioFormXLS</url-pattern>
+    </servlet-mapping>
+    
+    
+    
+    <servlet>
+		<servlet-name>MisPedidosServlet</servlet-name>
+		<servlet-class>mx.uam.azc.arachnocoders.enrrollate.controller.MisPedidosServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MisPedidosServlet</servlet-name>
+		<url-pattern>/MisPedidosServlet</url-pattern>
+	</servlet-mapping>
+    
+    
+    
+    
+        
+
+    
+    
+    
+    
+    
+    
+    
 </web-app>

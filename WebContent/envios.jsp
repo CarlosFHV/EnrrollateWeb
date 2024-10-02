@@ -1,24 +1,55 @@
-<!DOCTYPE html>
-<html lang="es">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Gestionar Envíos</title>
+    <title>Modificar Envíos</title>
 </head>
 <body>
-    <h1>Envíos</h1>
-    <form action="EnvioServlet" method="post">
-        <input type="text" name="id_pedido" placeholder="ID Pedido" required>
-        <input type="date" name="fecha_envio" placeholder="Fecha de Envío">
-        <input type="date" name="fecha_entrega" placeholder="Fecha de Entrega">
-        <select name="estado_envio">
-            <option value="en tránsito">En Tránsito</option>
-            <option value="entregado">Entregado</option>
-            <option value="retrasado">Retrasado</option>
-        </select>
-        <input type="text" name="empresa_transporte" placeholder="Empresa de Transporte">
-        <button type="submit">Registrar Envío</button>
+    <h2>Modificar Envíos</h2>
+    <table border="1">
+        <tr>
+            <th>ID Envío</th>
+            <th>ID Pedido</th>
+            <th>Fecha Envío</th>
+            <th>Fecha Entrega</th>
+            <th>Estado Envío</th>
+            <th>Empresa Transporte</th>
+            <th>Modificar</th>
+        </tr>
+        <c:forEach var="envio" items="${envios}">
+            <tr>
+                <form method="post" action="${pageContext.request.contextPath}/EnvioUpdate">
+                    <td><input type="hidden" name="id_envio" value="${envio.idEnvio}">${envio.idEnvio}</td>
+                    <td>${envio.idPedido}</td>
+                    <td>${envio.fechaEnvio}</td>
+                    <td><input type="text" name="fecha_entrega" value="${envio.fechaEntrega}"></td>
+                    <td>
+                        <select name="estado_envio">
+                            <option value="en tránsito" <c:if test="${envio.estadoEnvio == 'en tránsito'}">selected</c:if>>en tránsito</option>
+                            <option value="entregado" <c:if test="${envio.estadoEnvio == 'entregado'}">selected</c:if>>entregado</option>
+                            <option value="retrasado" <c:if test="${envio.estadoEnvio == 'retrasado'}">selected</c:if>>retrasado</option>
+                        </select>
+                    </td>
+                    <td><input type="text" name="empresa_transporte" value="${envio.empresaTransporte}"></td>
+                    <td><input type="submit" value="Modificar"></td>
+                </form>
+            </tr>
+        </c:forEach>
+    </table>
+<div>
+    <h3>Exportar Registros</h3>
+
+    <form method="get" action="${pageContext.request.contextPath}/ExportarEnviosXls">
+        <input type="submit" value="Exportar a XLS">
     </form>
-    <h2>Lista de Envíos</h2>
-    <!-- Aquí iría un código JSP para listar envíos desde la base de datos -->
+
+    <form method="get" action="${pageContext.request.contextPath}/ExportarEnviosPdfServlet">
+        <input type="submit" value="Exportar a PDF">
+    </form>
+
+    <form method="get" action="${pageContext.request.contextPath}/ExportarEnviosHtmlServlet">
+        <input type="submit" value="Exportar a HTML">
+    </form>
+</div>
+
 </body>
 </html>
